@@ -4,6 +4,7 @@ import {
     LOGIN_ACTION,
     AUTO_LOGIN_ACTION,
     LOGOUT_ACTION,
+    AUTO_LOGOUT_ACTION,
     SET_USER_JWT_MUTATION,
     SIGNUP_ACTION,
     LOADING_SPINNER_SHOW_MUTATION
@@ -11,7 +12,7 @@ import {
 import { Login, Signup } from '../../../services/ApiRequests';
 
 
-
+var logoutTimer = '';
 export default {
     [LOGOUT_ACTION](context) {
         context.commit(SET_USER_JWT_MUTATION, {
@@ -23,17 +24,35 @@ export default {
         });
 
         localStorage.removeItem('userData');
+        if (logoutTimer) {
+            clearTimeout(logoutTimer);
+        }
+    },
+
+    [AUTO_LOGOUT_ACTION](context) {
+        console.log("Token expired - logging out")
+        context.dispatch(LOGOUT_ACTION);
+        //TODO "are you still here?"
     },
 
 
     async [AUTO_LOGIN_ACTION](context){
-        let userData = localStorage.getItem('userData');
-        if (userData) {
-            context.commit(
-                SET_USER_JWT_MUTATION,
-                JSON.parse(userData),
-            );
-        }    
+        let userDataString = localStorage.getItem('userData');
+
+        if (userDataString) {
+            let userData = JSON.parse(userDataString);
+            let timeToExpiration = userData.ExpiresAt - new Date().getTime();
+
+            if (timeToExpiration < 10000) {
+                context.dispatch(AUTO_LOGOUT_ACTION);
+            } else {
+                logoutTimer = setTimeout(() => {
+                    context.dispatch(AUTO_LOGOUT_ACTION);
+                }, timeToExpiration);
+            }
+
+            context.commit(SET_USER_JWT_MUTATION, userData);
+        }
     },
 
     async [LOGIN_ACTION](context, payload) {  
@@ -83,10 +102,18 @@ export default {
 
         try{
             if (response.status == payload.expectedCode) {
+                let now = Date.now();
+                let tokenLifeTimeMs = response.data.JwtLifeTimeMs;
+                let expirationTime = new Date(now + tokenLifeTimeMs).getTime();
+
+                logoutTimer = setTimeout(() => {
+                    context.dispatch(AUTO_LOGOUT_ACTION);
+                }, tokenLifeTimeMs);
+
                 var userData = {
                     UserEmail: response.data.UserEmail,
                     Jwt: response.data.Jwt,
-                    ExpiresAt: response.data.ExpiresAt,
+                    ExpiresAt: expirationTime,
                     UserName: response.data.UserName,
                     UserId: response.data.UserId,
                 }
