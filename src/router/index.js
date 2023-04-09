@@ -3,6 +3,10 @@ import HomeView from "../views/HomeView.vue";
 import LoginView from "../views/LoginView.vue";
 import SignupView from "../views/SignupView.vue";
 import UserView from "../views/UserView.vue";
+import CashActionsView from "../views/CashActionsView.vue";
+import CategoriesView from "../views/CategoriesView.vue";
+import FundActionsView from "../views/FundActionsView.vue";
+import FundsView from "../views/FundsView.vue";
 import store from '../store/index';
 import { AUTH_MODULE, IS_USER_AUTHENTICATED_GETTER } from '../store/storeconstants';
 
@@ -30,6 +34,30 @@ const routes = [
     path: "/user",
     name: "user",
     component: UserView,
+    meta: { auth: true },
+  },
+  {
+    path: "/cash_actions",
+    name: "cashActions",
+    component: CashActionsView,
+    meta: { auth: true },
+  },
+  {
+    path: "/categories",
+    name: "categories",
+    component: CategoriesView,
+    meta: { auth: true },
+  },
+  {
+    path: "/fund_actions",
+    name: "fundActions",
+    component: FundActionsView,
+    meta: { auth: true },
+  },
+  {
+    path: "/funds",
+    name: "funds",
+    component: FundsView,
     meta: { auth: true },
   },
 ];

@@ -8,7 +8,6 @@ export default {
         return {
             Jwt: '',
             UserEmail: '',
-            UserId: '',
             UserName: '',
             ExpiresAt: '',
         };

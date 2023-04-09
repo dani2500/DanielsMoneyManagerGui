@@ -7,7 +7,11 @@ import {
     AUTO_LOGOUT_ACTION,
     SET_USER_JWT_MUTATION,
     SIGNUP_ACTION,
-    LOADING_SPINNER_SHOW_MUTATION
+    LOADING_SPINNER_SHOW_MUTATION,
+    ON_AUTO_LOGIN_OR_AUTH,
+    CASH_ACTIONS_MODULE,
+    POPULATE_CASH_ACTIONS_CATEGORIES_ACTION,
+    POPULATE_CASH_ACTIONS_CATEGORIES_BALANCES_ACTION
 } from '../../storeconstants';
 import { Login, Signup } from '../../../services/ApiRequests';
 
@@ -46,12 +50,12 @@ export default {
             if (timeToExpiration < 10000) {
                 context.dispatch(AUTO_LOGOUT_ACTION);
             } else {
+                context.commit(SET_USER_JWT_MUTATION, userData);
+                context.dispatch(ON_AUTO_LOGIN_OR_AUTH);
                 logoutTimer = setTimeout(() => {
                     context.dispatch(AUTO_LOGOUT_ACTION);
                 }, timeToExpiration);
             }
-
-            context.commit(SET_USER_JWT_MUTATION, userData);
         }
     },
 
@@ -62,6 +66,11 @@ export default {
             expectedCode: 200
             },
         );
+    },
+
+    async [ON_AUTO_LOGIN_OR_AUTH](context) {  
+        context.dispatch(`${CASH_ACTIONS_MODULE}/${POPULATE_CASH_ACTIONS_CATEGORIES_ACTION}`, null, { root: true });
+        context.dispatch(`${CASH_ACTIONS_MODULE}/${POPULATE_CASH_ACTIONS_CATEGORIES_BALANCES_ACTION}`, null , { root: true });
     },
 
     async [SIGNUP_ACTION](context, payload) {  
@@ -115,16 +124,16 @@ export default {
                     Jwt: response.data.Jwt,
                     ExpiresAt: expirationTime,
                     UserName: response.data.UserName,
-                    UserId: response.data.UserId,
                 }
 
                 localStorage.setItem('userData', JSON.stringify(userData));
                 context.commit(SET_USER_JWT_MUTATION,  userData);
+                context.dispatch(ON_AUTO_LOGIN_OR_AUTH);
             }
         }
         finally{
             context.commit(LOADING_SPINNER_SHOW_MUTATION, false, { root: true, });
         }
-
     },
+    
 };
