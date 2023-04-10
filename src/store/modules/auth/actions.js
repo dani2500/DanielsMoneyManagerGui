@@ -11,7 +11,10 @@ import {
     ON_AUTO_LOGIN_OR_AUTH,
     CASH_ACTIONS_MODULE,
     POPULATE_CASH_ACTIONS_CATEGORIES_ACTION,
-    POPULATE_CASH_ACTIONS_CATEGORIES_BALANCES_ACTION
+    POPULATE_CASH_ACTIONS_CATEGORIES_BALANCES_ACTION,
+    FUNDS_MODULE,
+    POPULATE_FUNDS_ACTION,
+    POPULATE_FUNDS_STATUS_ACTION
 } from '../../storeconstants';
 import { Login, Signup } from '../../../services/ApiRequests';
 
@@ -71,6 +74,8 @@ export default {
     async [ON_AUTO_LOGIN_OR_AUTH](context) {  
         context.dispatch(`${CASH_ACTIONS_MODULE}/${POPULATE_CASH_ACTIONS_CATEGORIES_ACTION}`, null, { root: true });
         context.dispatch(`${CASH_ACTIONS_MODULE}/${POPULATE_CASH_ACTIONS_CATEGORIES_BALANCES_ACTION}`, null , { root: true });
+        context.dispatch(`${FUNDS_MODULE}/${POPULATE_FUNDS_ACTION}`, null , { root: true });
+        context.dispatch(`${FUNDS_MODULE}/${POPULATE_FUNDS_STATUS_ACTION}`, null , { root: true });
     },
 
     async [SIGNUP_ACTION](context, payload) {  

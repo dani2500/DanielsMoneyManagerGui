@@ -1,6 +1,9 @@
 import { createStore } from "vuex";
+
 import auth from './modules/auth/index';
 import cashActions from './modules/cashActions/index';
+import funds from './modules/funds/index';
+
 import { LOADING_SPINNER_SHOW_MUTATION } from './storeconstants';
 
 
@@ -20,5 +23,6 @@ export default createStore({
   modules: {
     auth,
     cashActions,
+    funds,
   },
 });

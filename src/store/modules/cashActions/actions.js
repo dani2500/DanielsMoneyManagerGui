@@ -34,7 +34,7 @@ import {
   updateCashActions,
   updateCashActionsCategory,
 } from "../../../services/ApiRequests";
-import CategoryValidations from "../../../services/CategoryValidations";
+import GeneralValidations from "../../../services/GeneralValidations";
 
 export default {
   // --------------------------- Cash Actions ---------------------------
@@ -96,7 +96,7 @@ export default {
         code = err.response.status;
         msg = err.response.data.message;
       }
-      let errorMessage = CategoryValidations.getErrorMessage(code, msg);
+      let errorMessage = GeneralValidations.getErrorMessage(code, msg);
       throw errorMessage;
     }
   },

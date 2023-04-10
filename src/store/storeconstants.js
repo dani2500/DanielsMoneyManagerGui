@@ -1,6 +1,8 @@
 // Modules
 export const AUTH_MODULE = 'auth';
 export const CASH_ACTIONS_MODULE = 'cashActions';
+export const FUNDS_MODULE = 'funds';
+
 
 // --------------------------------------------------- Auth ---------------------------------------------------
 // Actions
@@ -64,3 +66,28 @@ export const GET_CATEGORIES_GETTER ='[getters] get cash actions categories';
 export const GET_CATEGORIES_BALANCES_GETTER ='[getters] get cash actions categories balances';
 export const GET_CATEGORIES_BALANCES_TO_TIME_GETTER = '[getters] get cash actions categories balances to time';
 export const GET_TOTAL_BALANCE_TO_TIME_GETTER ='[getters] get cash actions categories total balance to time';
+
+
+// --------------------------------------------------- Funds ---------------------------------------------------
+
+
+// Actions
+export const POPULATE_FUNDS_ACTION =    '[actions] populate funds';
+export const POPULATE_FUNDS_STATUS_ACTION =    '[actions] populate funds status';
+export const ADD_FUND_ACTION =    '[actions] add fund';
+export const UPDATE_FUND_ACTION =    '[actions] update fund';
+export const DELETE_FUND_ACTION =    '[actions] delete fund';
+export const SET_FUNDS_STATUS_TO_TIME_ACTION =    '[actions] set funds status to time';
+
+// Mutations
+export const POPULATE_FUNDS_MUTATION =    '[mutations] populate funds';
+export const POPULATE_FUNDS_STATUS_MUTATION =    '[mutations] populate funds status';
+export const ADD_FUND_MUTATION =    '[mutations] add fund';
+export const UPDATE_FUND_MUTATION =    '[mutations] update fund';
+export const DELETE_FUND_MUTATION =    '[mutations] delete fund';
+export const SET_FUNDS_STATUS_TO_TIME_MUTATION =    '[mutations] set funds status to time';
+
+// Getters
+export const GET_FUNDS_GETTER = '[getters] get funds';
+export const GET_FUNDS_STATUS_GETTER ='[getters] get funds status';
+export const GET_FUNDS_STATUS_TO_TIME_GETTER ='[getters] get funds status to time';

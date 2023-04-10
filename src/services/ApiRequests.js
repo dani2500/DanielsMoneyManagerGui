@@ -2,6 +2,7 @@ import { GetAxios, GetAxiosTokenized } from '../services/AxiosTokenized';
 
 const AUTH_ROUTE = "auth"
 const CASH_ACTIONS_ROUTE = "cash_actions"
+const FUNDS_ROUTE = "funds"
 
 // ---------------------------------------- Users ----------------------------------------
 export async function Login(email, pw){
@@ -107,6 +108,41 @@ export async function getCashActionsCategoriesBalances(toTime){
 
 export async function getCashActionsTotalBalances(toTime){
     var response = await GetAxiosTokenized().get(`/${CASH_ACTIONS_ROUTE}/total_balance`, {
+        params: {
+            toTime: toTime,
+        }
+    })     
+    return response.data;
+}
+
+
+// ---------------------------------------- Funds ----------------------------------------
+
+
+export async function getFunds(){
+    var response = await GetAxiosTokenized().get(`/${FUNDS_ROUTE}/funds`,)     
+    return response.data;
+}
+
+export async function insertFund(fund){
+    var response = await GetAxiosTokenized().post(`/${FUNDS_ROUTE}/funds`, fund)     
+    return response;
+}
+
+export async function updateFund(fund){
+    var response = await GetAxiosTokenized().put(`/${FUNDS_ROUTE}/funds`, fund)     
+    return response;
+}
+
+export async function deleteFund(fund){
+    var response = await GetAxiosTokenized().delete(`/${FUNDS_ROUTE}/funds`, {
+        data: fund
+      })     
+    return response;
+}
+
+export async function getFundsStatus(toTime){
+    var response = await GetAxiosTokenized().get(`/${FUNDS_ROUTE}/status`, {
         params: {
             toTime: toTime,
         }

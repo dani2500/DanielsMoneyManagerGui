@@ -1,4 +1,4 @@
-export default class CategoryValidations {
+export default class GeneralValidations {
     static getErrorMessage(errorCode, msg = null) {
         var res = ''
         switch (errorCode) {
@@ -9,7 +9,7 @@ export default class CategoryValidations {
                 res = 'Server is not responding'
                 break;
             case 409:
-                res = 'Category name already exists';
+                res = 'Name already exists';
                 break;
             default:
                 res = 'Something went wrong :('
