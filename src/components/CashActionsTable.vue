@@ -25,10 +25,10 @@
                 >
                   <option
                     v-for="option in categoriesForSearch"
-                    :value="option.value"
-                    :key="option.value"
+                    :value="option.categoryId"
+                    :key="option.categoryId"
                   >
-                    {{ option.text }}
+                    {{ option.categoryName }}
                   </option>
                 </select>
               </div>
@@ -89,10 +89,10 @@
             >
               <option
                 v-for="option in categories"
-                :value="option.value"
-                :key="option.value"
+                :value="option.categoryId"
+                :key="option.categoryId"
               >
-                {{ option.text }}
+                {{ option.categoryName }}
               </option>
             </select>
           </div>
@@ -229,10 +229,10 @@
               >
                 <option
                   v-for="option in categories"
-                  :value="option.value"
-                  :key="option.value"
+                  :value="option.categoryId"
+                  :key="option.categoryId"
                 >
-                  {{ option.text }}
+                  {{ option.categoryName }}
                 </option>
               </select>
               <label>Description</label>
@@ -252,7 +252,7 @@
               />
               <label>Date</label>
               <input
-                type="datetime-local"
+                type="date"
                 class="form-control"
                 v-model="editActionDate"
                 required
@@ -332,37 +332,36 @@ export default {
     }),
     cashActionsTableContent: function () {
       let result = [];
-      let actionsString = JSON.stringify(this.cashActions); //pull it out of proxy state
-      let actions = JSON.parse(actionsString);
 
-      let categoriesString = JSON.stringify(this.categories); //pull it out of proxy state
-      let categories = JSON.parse(categoriesString);
+      let actions = this.cashActions;
+      let categories = this.categories;
 
-      if (actions !== undefined && actions.length > 0) {
-        actions.forEach((action) => {
-          let actionNew = action;
-          let currCategoryId = action.categoryId;
-          let category = categories.find((x) => x.value == currCategoryId);
-          if (category === undefined) {
-            console.log(
-              `No category name fount for category id ${currCategoryId}`
-            );
-            return [];
-          }
-          let categoryName = category.text;
-          action.categoryName = categoryName;
-          result.push(actionNew);
-        });
-      }
+      actions.forEach((action) => {
+        let currCategoryId = action.categoryId;
+        let category = categories.find((x) => x.categoryId == currCategoryId);
+        if (category === undefined) {
+          console.log(
+            `No category name fount for category id ${currCategoryId}`
+          );
+          return [];
+        }
+        action.categoryName = category.categoryName;
+        result.push(action);
+      });
 
       return result;
     },
     categoriesForSearch: function () {
-      let options = JSON.parse(JSON.stringify(this.categories)); //deep copy
+      let options = [];
       options.push({
-        value: -1,
-        text: "All",
+        categoryId: -1,
+        categoryName: "All",
       });
+
+      this.categories.forEach(category => {
+        options.push(category)
+      })
+
       return options;
     },
   },
@@ -382,26 +381,14 @@ export default {
         this.newActionCategory = newCategories[0].value;
       }
     },
-    fromTime(newTime) {
-      this.populateCashActions({
-        fromTime: newTime,
-        toTime: this.toTime,
-        categoryId: this.filterByCategoryId,
-      });
+    fromTime() {
+      this.filterData();
     },
-    toTime(newTime) {
-      this.populateCashActions({
-        fromTime: this.fromTime,
-        toTime: newTime,
-        categoryId: this.filterByCategoryId,
-      });
+    toTime() {
+      this.filterData();
     },
-    filterByCategoryId(newCategoryId) {
-      this.populateCashActions({
-        fromTime: this.fromTime,
-        toTime: this.toTime,
-        categoryId: newCategoryId,
-      });
+    filterByCategoryId() {
+      this.filterData();
     },
   },
   methods: {
@@ -411,6 +398,20 @@ export default {
       deleteCashActions: DELETE_CASH_ACTION_ACTION,
       updateCashAction: UPDATE_CASH_ACTION_ACTION,
     }),
+    filterData(){
+      if (!this.fromTime){
+        this.fromTime = '1970-01-01'
+      }
+      if (!this.toTime){
+        this.toTime = '2050-01-01'
+      }
+
+      this.populateCashActions({
+        fromTime: this.fromTime,
+        toTime: this.toTime,
+        categoryId: this.filterByCategoryId,
+      });
+    },
     populateForSingleDelete(item) {
       this.deleteText = `Are you sure you would like do delete record: ${item.description} (Sum=${item.sum})`;
       this.deleteCandidates = item.cashActionId.toString();
@@ -464,7 +465,3 @@ export default {
   },
 };
 </script>
-<style>
-@import "bootstrap";
-@import "datatables.net-bs5";
-</style>

@@ -1,5 +1,5 @@
 <template>
-  <h3>Current Balances</h3>
+  <h3>Categories Balances</h3>
     <EasyDataTable 
     :headers="headers" 
     :items="categoriesBalance" 
@@ -37,8 +37,7 @@
       categoriesBalance: function () {
         let result = [];
   
-        let categoriesString = JSON.stringify(this.categories); //pull it out of proxy state
-        let categories = JSON.parse(categoriesString);
+        let categories = this.categories
 
         if (
           categories !== undefined &&
@@ -47,8 +46,9 @@
           this.balancesById.length > 0
         ) {
           categories.forEach((category) => {
-            let categoryName = category.text;
-            let currCategoryId = category.value;
+            let categoryName = category.categoryName;
+            let currCategoryId = category.categoryId;
+
             let currBalanceRow = this.balancesById.find(
               (x) => x.categoryId == currCategoryId
             );

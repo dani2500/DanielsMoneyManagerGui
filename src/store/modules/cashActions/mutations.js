@@ -44,14 +44,7 @@ export default {
     },
     // ------------------------------ Categories ------------------------------
     [SET_CASH_ACTIONS_CATEGORIES_MUTATION](state, payload) {
-        let adaptedToSelect = []
-        payload.forEach(element => {
-            let category = {};
-            category.value = element.categoryId
-            category.text = element.categoryName
-            adaptedToSelect.push(category)
-        });
-        state.categories = adaptedToSelect;
+        state.categories = payload;
     },
     [SET_CASH_ACTIONS_CATEGORIES_BALANCES_MUTATION](state, payload) {
         state.categoriesBalances = payload;
@@ -63,11 +56,8 @@ export default {
         state.toTimeTotalBalance = payload;
     },
     [ADD_CASH_ACTION_CATEGORY_MUTATION](state, payload) {
-        let category = {}
-        category.value = payload.categoryId
-        category.text = payload.categoryName
-        state.categories.push(category);
-        //---
+        state.categories.push(payload);
+        
         let balance = {
             categoryId: payload.categoryId,
             categoryBalance: 0,
@@ -77,15 +67,14 @@ export default {
     },
     [UPDATE_CASH_ACTION_CATEGORY_MUTATION](state, payload) {
         let categories = state.categories;
-        let idx = categories.findIndex((obj => obj.value == payload.categoryId));
-        categories[idx].text = payload.categoryName;
-
+        let idx = categories.findIndex((obj => obj.categoryId == payload.categoryId));
+        categories[idx].categoryName = payload.categoryName;
         state.categories = categories;
     },
 
     [DELETE_CASH_ACTION_CATEGORY_MUTATION](state, payload) {
         let categories = state.categories.filter(function( obj ) {
-            return obj.value !== payload.categoryId;
+            return obj.categoryId !== payload.categoryId;
         });
         state.categories = categories;
     },

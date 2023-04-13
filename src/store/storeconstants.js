@@ -74,20 +74,38 @@ export const GET_TOTAL_BALANCE_TO_TIME_GETTER ='[getters] get cash actions categ
 // Actions
 export const POPULATE_FUNDS_ACTION =    '[actions] populate funds';
 export const POPULATE_FUNDS_STATUS_ACTION =    '[actions] populate funds status';
+export const POPULATE_FUND_ACTIONS_ACTION =    '[actions] populate fund actions';
+
+
 export const ADD_FUND_ACTION =    '[actions] add fund';
+export const ADD_FUND_ACTION_ACTION =    '[actions] add fund action';
+
 export const UPDATE_FUND_ACTION =    '[actions] update fund';
+export const UPDATE_FUND_ACTION_ACTION =    '[actions] update fund action';
+
 export const DELETE_FUND_ACTION =    '[actions] delete fund';
+export const DELETE_FUND_ACTION_ACTION =    '[actions] delete fund action';
+
 export const SET_FUNDS_STATUS_TO_TIME_ACTION =    '[actions] set funds status to time';
 
 // Mutations
 export const POPULATE_FUNDS_MUTATION =    '[mutations] populate funds';
 export const POPULATE_FUNDS_STATUS_MUTATION =    '[mutations] populate funds status';
+export const POPULATE_FUND_ACTIONS_MUTATION =    '[mutations] populate fund actions';
+
 export const ADD_FUND_MUTATION =    '[mutations] add fund';
+export const ADD_FUND_ACTION_MUTATION =    '[mutations] add fund action';
+
 export const UPDATE_FUND_MUTATION =    '[mutations] update fund';
+export const UPDATE_FUND_ACTION_MUTATION =    '[mutations] update fund action';
+
 export const DELETE_FUND_MUTATION =    '[mutations] delete fund';
+export const DELETE_FUND_ACTION_MUTATION =    '[mutations] delete fund action';
+
 export const SET_FUNDS_STATUS_TO_TIME_MUTATION =    '[mutations] set funds status to time';
 
 // Getters
 export const GET_FUNDS_GETTER = '[getters] get funds';
 export const GET_FUNDS_STATUS_GETTER ='[getters] get funds status';
 export const GET_FUNDS_STATUS_TO_TIME_GETTER ='[getters] get funds status to time';
+export const GET_FUND_ACTIONS_GETTER = '[getters] get fund actions'

@@ -193,8 +193,9 @@ export default {
         this.balancesById.length > 0
       ) {
         categories.forEach((category) => {
-          let categoryName = category.text;
-          let currCategoryId = category.value;
+          let categoryName = category.categoryName;
+          let currCategoryId = category.categoryId;
+          
           let currBalanceRow = this.balancesById.find(
             (x) => x.categoryId == currCategoryId
           );

@@ -1,16 +1,24 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-sm">
-        <div style="width: 70%; margin: 0 auto">
+      <div class="col">
+        <div style="width: 80%; margin: 0 auto">
           <!--margin:0 auto;-->
           <OverallStatus />
         </div>
       </div>
-      <div class="col-sm">
-        <div style="width: 70%; margin: 0 auto">
+      <div class="col">
+        <div style="width: 80%; margin: 0 auto">
           <!--margin:0 auto;-->
           <CategoriesStatusSmall />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div style="width: 100%; margin: 0 auto">
+            <!--margin:0 auto;-->
+            <FundsStatusSmall />
+          </div>
         </div>
       </div>
     </div>
@@ -19,6 +27,7 @@
 
 <script>
 import CategoriesStatusSmall from "../components/CategoriesStatusSmall.vue";
+import FundsStatusSmall from "../components/FundsStatusSmall.vue";
 import OverallStatus from "../components/OverallStatus.vue";
 
 export default {
@@ -28,6 +37,7 @@ export default {
   components: {
     CategoriesStatusSmall,
     OverallStatus,
+    FundsStatusSmall,
   },
   computed: {},
   watch: {},

@@ -1,32 +1,12 @@
 <template>
   <h3>Overall Status</h3>
 
-  <table class="table table-striped text-start">
-    <thead>
-      <tr>
-        <th>Field</th>
-        <th>Value</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>User Name</td>
-        <td>{{ userName }}</td>
-      </tr>
-      <tr>
-        <td>Email</td>
-        <td>{{ userEmail }}</td>
-      </tr>
-      <tr>
-        <td>Total Balance (Current)</td>
-        <td>{{ currCashActionsTotalBalance }}</td>
-      </tr>
-      <tr>
-        <td>Total Balance (Till {{ prevDateStr }})</td>
-        <td>{{ prevCashActionsTotalBalance }}</td>
-      </tr>
-    </tbody>
-  </table>
+    <EasyDataTable 
+    :headers="headers" 
+    :items="tableData" 
+    table-class-name="customize-table"
+    alternating>
+    </EasyDataTable>
 </template>
 
 <script>
@@ -41,6 +21,10 @@ import { getCashActionsTotalBalances } from "../services/ApiRequests";
 export default {
   data() {
     return {
+      headers: [
+        { text: "Field", value: "fieldName" },
+        { text: "Value", value: "value" },
+      ],
       currCashActionsTotalBalancePromise: {},
       currCashActionsTotalBalance: 0,
       prevCashActionsTotalBalancePromise: {}, //previous month
@@ -53,6 +37,31 @@ export default {
       userName: GET_USER_NAME_GETTER,
       userEmail: GET_USER_EMAIL_GETTER,
     }),
+    tableData: function (){
+      let res = [];
+
+      res.push({
+        fieldName: 'User Name',
+        value: this.userName
+      });
+
+      res.push({
+        fieldName: 'Email',
+        value: this.userEmail
+      });
+
+      res.push({
+        fieldName: 'Total Balance (Current)',
+        value: this.currCashActionsTotalBalance
+      });
+
+      res.push({
+        fieldName: `Total Balance (Till ${this.prevDateStr})`,
+        value: this. prevCashActionsTotalBalance
+      });
+
+      return res;
+    }
   },
   watch: {
     currCashActionsTotalBalancePromise(newVal) {

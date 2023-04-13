@@ -186,8 +186,7 @@ export default {
     fundsStatusToTable: function () {
       let result = [];
       
-      let fundsString = JSON.stringify(this.funds); //pull it out of proxy state
-      let funds = JSON.parse(fundsString);
+      let funds = this.funds;
 
       if (
         funds !== undefined &&
@@ -205,15 +204,8 @@ export default {
             return [];
           }
 
-          let newFundElement = {};
-          newFundElement.fundName = fund.fundName;
-          newFundElement.fundId = fund.fundId;
-          newFundElement.firstInvestmentDate = fundStatus.firstInvestmentDate;
-          newFundElement.lastInvestmentDate = fundStatus.lastInvestmentDate;
-          newFundElement.investedSum = fundStatus.investedSum;
-          newFundElement.actualSum = fundStatus.actualSum;
-          newFundElement.profit = fundStatus.profit;
-          result.push(newFundElement);
+          fundStatus.fundName = fund.fundName;
+          result.push(fundStatus);
         });
       }
       
@@ -278,8 +270,6 @@ export default {
       let newFund = {
         fundName: this.inputFundName,
       };
-
-      console.log(newFund)
 
       try {
         await this.addFundAction(newFund);

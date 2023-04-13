@@ -149,3 +149,33 @@ export async function getFundsStatus(toTime){
     })     
     return response.data;
 }
+
+// ---------------------------------------- Fund Actions ----------------------------------------
+
+export async function getFundActions(fromTime, toTime, fundId){
+    var response = await GetAxiosTokenized().get(`/${FUNDS_ROUTE}/fund_actions`, {
+        params: {
+            fromTime: fromTime,
+            toTime: toTime,
+            fundId: fundId
+        }
+    })     
+    return response.data;
+}
+
+export async function insertFundActions(fundAction){
+    var response = await GetAxiosTokenized().post(`/${FUNDS_ROUTE}/fund_actions`, fundAction)     
+    return response.data;
+}
+
+export async function updateFundActions(fundAction){
+    var response = await GetAxiosTokenized().put(`/${FUNDS_ROUTE}/fund_actions`, fundAction)     
+    return response.data;
+}
+
+export async function deleteFundActions(fundActionIds){
+    var response = await GetAxiosTokenized().delete(`/${FUNDS_ROUTE}/fund_actions`,  {
+        data: fundActionIds
+      });    
+    return response.data;
+}

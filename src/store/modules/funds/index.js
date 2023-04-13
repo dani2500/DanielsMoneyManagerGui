@@ -9,6 +9,7 @@ export default {
             funds: [],
             fundsStatus: [],
             fundsStatusToTime: new Date(),
+            fundActions: []
         };
     },
     mutations,
