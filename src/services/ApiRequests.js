@@ -106,10 +106,19 @@ export async function getCashActionsCategoriesBalances(toTime){
     return response.data;
 }
 
-export async function getCashActionsTotalBalances(toTime){
+export async function getCashActionsCategoriesTotalBalance(toTime){
     var response = await GetAxiosTokenized().get(`/${CASH_ACTIONS_ROUTE}/total_balance`, {
         params: {
             toTime: toTime,
+        }
+    })     
+    return response.data;
+}
+
+export async function getCashActionsCategoriesBalanceHistory(maxTimeBackMonths){
+    var response = await GetAxiosTokenized().get(`/${CASH_ACTIONS_ROUTE}/balances_history`, {
+        params: {
+            maxTimeBackMonths: maxTimeBackMonths,
         }
     })     
     return response.data;
@@ -143,6 +152,24 @@ export async function deleteFund(fund){
 
 export async function getFundsStatus(toTime){
     var response = await GetAxiosTokenized().get(`/${FUNDS_ROUTE}/status`, {
+        params: {
+            toTime: toTime,
+        }
+    })     
+    return response.data;
+}
+
+export async function getFundsStatusHistory(maxTimeBackMonths){
+    var response = await GetAxiosTokenized().get(`/${FUNDS_ROUTE}/status_history`, {
+        params: {
+            maxTimeBackMonths: maxTimeBackMonths,
+        }
+    })     
+    return response.data;
+}
+
+export async function getFundsStatusTotal(toTime){
+    var response = await GetAxiosTokenized().get(`/${FUNDS_ROUTE}/status_total`, {
         params: {
             toTime: toTime,
         }

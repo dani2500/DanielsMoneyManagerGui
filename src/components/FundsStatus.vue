@@ -205,6 +205,21 @@ export default {
           }
 
           fundStatus.fundName = fund.fundName;
+
+          if(fundStatus.firstInvestmentDate){
+            fundStatus.firstInvestmentDate = fundStatus.firstInvestmentDate.slice(0,10);
+          }
+          else{
+            fundStatus.firstInvestmentDate = "-";
+          }
+
+          if(fundStatus.lastInvestmentDate){
+            fundStatus.lastInvestmentDate = fundStatus.lastInvestmentDate.slice(0,10);
+          }
+          else{
+            fundStatus.lastInvestmentDate = "-";
+          }
+
           result.push(fundStatus);
         });
       }

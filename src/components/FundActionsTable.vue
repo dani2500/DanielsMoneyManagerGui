@@ -372,6 +372,7 @@ export default {
             return [];
           }
           action.fundName = fund.fundName;
+          action.investmentDate = action.investmentDate.slice(0,10)
           result.push(action);
         });
       }

@@ -1,24 +1,27 @@
 <template>
   <NavBar />
   <TheLoader v-if="showLoading"></TheLoader>
+  <ToastMessage></ToastMessage>
   <router-view />
 </template>
 
 <script>
-  import { mapState } from 'vuex';
+  import { mapGetters } from 'vuex';
   import NavBar from './components/NavBar.vue';
   import TheLoader from './components/TheLoader.vue';
-  import { AUTH_MODULE, AUTO_LOGIN_ACTION, } from './store/storeconstants';
+  import ToastMessage from './components/ToastMessage.vue';
+  import { AUTH_MODULE, AUTO_LOGIN_ACTION, GET_LOADING_SPINNER_SHOW_GETTER} from './store/storeconstants';
 
   export default {
     name: 'App',
     components: {
       NavBar,
       TheLoader,
+      ToastMessage,
     },
     computed: {
-        ...mapState({
-            showLoading: (state) => state.showLoading,
+        ...mapGetters({
+            showLoading: GET_LOADING_SPINNER_SHOW_GETTER,
         }),
     },
     created() {

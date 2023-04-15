@@ -1,18 +1,21 @@
 <template>
   <div class="container">
-    <div class="row">
-      <div class="col">
-        <div style="width: 80%; margin: 0 auto">
+      <div class="row">
+        <div style="width: 100%; margin: 0 auto">
           <!--margin:0 auto;-->
           <OverallStatus />
         </div>
       </div>
-      <div class="col">
-        <div style="width: 80%; margin: 0 auto">
+      <hr />
+      <br />
+      <div class="row">
+        <div style="width: 100%; margin: 0 auto">
           <!--margin:0 auto;-->
           <CategoriesStatusSmall />
         </div>
       </div>
+      <hr />
+      <br />
       <div class="row">
         <div class="col">
           <div style="width: 100%; margin: 0 auto">
@@ -21,7 +24,6 @@
           </div>
         </div>
       </div>
-    </div>
   </div>
 </template>
 

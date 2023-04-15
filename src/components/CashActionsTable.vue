@@ -118,7 +118,7 @@
           <div class="col-3">
             <label>Date</label>
             <input
-              type="date"
+              type="datetime-local"
               class="form-control"
               v-model="newActionDate"
               required
@@ -252,7 +252,7 @@
               />
               <label>Date</label>
               <input
-                type="date"
+                type="datetime-local"
                 class="form-control"
                 v-model="editActionDate"
                 required
@@ -346,6 +346,7 @@ export default {
           return [];
         }
         action.categoryName = category.categoryName;
+        action.cashActionTime = action.cashActionTime.slice(0,16);
         result.push(action);
       });
 
@@ -374,6 +375,8 @@ export default {
     this.fromTime = fromDate.toISOString().split("T")[0];
 
     this.filterByCategoryId = -1;
+
+    this.resetNewActionDate();
   },
   watch: {
     categories(newCategories) {
@@ -442,10 +445,11 @@ export default {
       await this.addCashAction(action);
 
       // Clear
+      this.resetNewActionDate();
+
       this.newActionCategory = -1;
       this.newActionDescription = "";
       this.newActionSum = 0;
-      this.newActionDate = "";
 
       if (this.categories.length > 0) {
         this.newActionCategory = this.categories[0].value;
@@ -462,6 +466,11 @@ export default {
       await this.updateCashAction(action);
       this.$refs.closeEditModal.click();
     },
+    resetNewActionDate(){
+      var d = new Date();
+      d.setUTCHours(24,0,0,0);
+      this.newActionDate = d.toISOString().slice(0,16);
+    }
   },
 };
 </script>

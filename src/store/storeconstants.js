@@ -3,6 +3,21 @@ export const AUTH_MODULE = 'auth';
 export const CASH_ACTIONS_MODULE = 'cashActions';
 export const FUNDS_MODULE = 'funds';
 
+// --------------------------------------------------- General ---------------------------------------------------
+// Actions
+export const LOADING_SPINNER_SHOW_ACTION = '[actions] show loading spinner';
+export const TOAST_SHOW_ACTION = '[actions] show toast';
+
+export const LOADING_SPINNER_HIDE_ACTION = '[actions] hide loading spinner';
+export const TOAST_HIDE_ACTION = '[actions] hide toast';
+
+// Mutations
+export const LOADING_SPINNER_SHOW_MUTATION = '[mutations] show loading spinner';
+export const TOAST_SHOW_MUTATION = '[mutations] show toast';
+
+// Getters
+export const GET_LOADING_SPINNER_SHOW_GETTER = '[getters] get loading spinner';
+export const GET_TOAST_SHOW_GETTER ='[getters] get toast';
 
 // --------------------------------------------------- Auth ---------------------------------------------------
 // Actions
@@ -16,7 +31,6 @@ export const ON_AUTO_LOGIN_OR_AUTH = '[actions] on auto login or auth';
 
 // Mutations
 export const SET_USER_JWT_MUTATION = '[mutations] set user jwt';
-export const LOADING_SPINNER_SHOW_MUTATION = '[mutations] show loading spinner';
 export const SET_AUTO_LOGOUT_MUTATION = '[mutations] set auto logout';
 
 // Getters
