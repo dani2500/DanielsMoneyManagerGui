@@ -1,30 +1,49 @@
 <template>
-    <p>User Name: {{ userName }}</p>
-    <p>Email: {{ userEmail }}</p>
-    <p>User ID: {{ userId }}</p>
+  <div class="container">
+      <div class="row">
+        <div style="width: 100%; margin: 0 auto">
+          <!--margin:0 auto;-->
+          <OverallStatus />
+        </div>
+      </div>
+      <hr />
+      <br />
+      <div class="row">
+        <div style="width: 100%; margin: 0 auto">
+          <!--margin:0 auto;-->
+          <CategoriesStatusSmall />
+        </div>
+      </div>
+      <hr />
+      <br />
+      <div class="row">
+        <div class="col">
+          <div style="width: 100%; margin: 0 auto">
+            <!--margin:0 auto;-->
+            <FundsStatusSmall />
+          </div>
+        </div>
+      </div>
+  </div>
 </template>
 
 <script>
-    import { mapGetters } from 'vuex';
-    import { AUTH_MODULE, GET_USER_NAME_GETTER, GET_USER_EMAIL_GETTER, GET_USER_ID_GETTER } from '../store/storeconstants';
-    import { GetUser } from '../services/ApiRequests';
+import CategoriesStatusSmall from "../components/CategoriesStatusSmall.vue";
+import FundsStatusSmall from "../components/FundsStatusSmall.vue";
+import OverallStatus from "../components/OverallStatus.vue";
 
-    export default {
-        data() {
-            return {
-            };
-        },
-        computed: {
-        ...mapGetters(AUTH_MODULE, {
-            userName: GET_USER_NAME_GETTER,
-            userEmail: GET_USER_EMAIL_GETTER,
-            userId: GET_USER_ID_GETTER,
-            }),
-        },
-        mounted() {
-            GetUser();
-        },
-        methods: {
-        },  
-    };
+export default {
+  data() {
+    return {};
+  },
+  components: {
+    CategoriesStatusSmall,
+    OverallStatus,
+    FundsStatusSmall,
+  },
+  computed: {},
+  watch: {},
+  mounted() {},
+  methods: {},
+};
 </script>

@@ -6,10 +6,11 @@ export default {
     namespaced: true,
     state() {
         return {
-            Jwt: '',
-            UserEmail: '',
-            UserName: '',
-            ExpiresAt: '',
+            cashActions: [],
+            categories: [],
+            categoriesBalances: [],
+            toTimeBalances: new Date(),
+            toTimeTotalBalance: new Date(),
         };
     },
     mutations,

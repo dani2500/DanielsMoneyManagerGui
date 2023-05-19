@@ -6,10 +6,10 @@ export default {
     namespaced: true,
     state() {
         return {
-            Jwt: '',
-            UserEmail: '',
-            UserName: '',
-            ExpiresAt: '',
+            funds: [],
+            fundsStatus: [],
+            fundsStatusToTime: new Date(),
+            fundActions: []
         };
     },
     mutations,
